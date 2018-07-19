@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { PostService } from '../services/post.service';
-import { Post } from '../models/Post.model';
+import { Post } from '../models/post.model';
 
 @Component({
   selector: 'app-post-list',

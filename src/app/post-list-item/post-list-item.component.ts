@@ -1,31 +1,29 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { Post } from '../models/post.model';
 
 @Component({
   selector: 'app-post-list-item',
   templateUrl: './post-list-item.component.html',
   styleUrls: ['./post-list-item.component.scss']
 })
-export class PostListItemComponent implements OnInit {
 
-  @Input() title: string;
+export class PostListItemComponent {
 
-  @Input() content: string;
-
-  @Input() loveIts: number;
-
-  @Input() created_at: Date;
+  @Input() post: Post;
 
   constructor() { }
 
-  ngOnInit() {
+  onLoveIt(post: Post) {
+    post.loveIts++;
   }
 
-  onLoveIt() {
-    this.loveIts++;
+  onDontLoveIt(post: Post) {
+    post.loveIts--;
   }
 
-  onDontLoveIt() {
-    this.loveIts--;
+  onDeletePost(post: Post) {
+
   }
 
 }
