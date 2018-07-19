@@ -26,6 +26,15 @@ export class PostService {
   }
 
   removePost(post: Post) {
+    const postIndexToRemove = this.posts.findIndex(
+      (postEl) => {
+        if(postEl === post) {
+          return true;
+        }
+      }
+    );
+    this.posts.splice(postIndexToRemove, 1);
+    this.emitPostSubject();
   }
 
 }
