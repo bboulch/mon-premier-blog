@@ -8,17 +8,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PostListItemComponentComponent implements OnInit {
 
   @Input() title: string;
-  
+
   @Input() content: string;
-  
-  @Input() loveIts: number = 0;
-  
-  created_at: Date;
+
+  @Input() loveIts: number;
+
+  @Input() created_at: Date;
 
   constructor() { }
 
   ngOnInit() {
-    this.created_at = new Date();
   }
 
   onLoveIt() {
@@ -28,5 +27,5 @@ export class PostListItemComponentComponent implements OnInit {
   onDontLoveIt() {
     this.loveIts--;
   }
-  
+
 }
