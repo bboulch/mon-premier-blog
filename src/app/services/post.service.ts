@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import * as firebase from 'firebase';
 
 import { Post } from '../models/post.model';
 
@@ -8,20 +9,28 @@ export class PostService {
 
   postsSubject = new Subject<Post[]>();
 
-  posts: Post[] = [
-    new Post('Mon premier blog', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis', 0, new Date()),
-    new Post('Mon deuxième blog', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis', 10, new Date()),
-    new Post('Mon troisième blog', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis', -1, new Date())
-  ];
-
-  constructor() { }
+  posts: Post[] = [];
 
   emitPostSubject() {
     this.postsSubject.next(this.posts.slice());
   }
 
+  getPosts() {
+    firebase.database().ref('/posts')
+      .on('value', (data: firebase.database.DataSnapshot) => {
+          this.posts = data.val() ? data.val() : [];
+          this.emitPostSubject();
+        }
+      );
+  }
+
+  savePosts() {
+      firebase.database().ref('/posts').set(this.posts);
+  }
+
   createPost(newPost: Post) {
     this.posts.push(newPost);
+    this.savePosts();
     this.emitPostSubject();
   }
 
@@ -34,6 +43,7 @@ export class PostService {
       }
     );
     this.posts.splice(postIndexToRemove, 1);
+    this.savePosts();
     this.emitPostSubject();
   }
 
@@ -47,6 +57,7 @@ export class PostService {
 
   updateLoveIt(post: Post, count: number) {
     post.loveIts += count;
+    this.savePosts();
   }
 
 }
