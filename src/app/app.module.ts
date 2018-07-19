@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { PostListItemComponentComponent } from './post-list-item-component/post-list-item-component.component';
-import { PostListComponentComponent } from './post-list-component/post-list-component.component';
+import { PostListItemComponent } from './post-list-item/post-list-item.component';
+import { PostListComponent } from './post-list/post-list.component';
 import { NewPostComponentComponent } from './new-post-component/new-post-component.component';
 
 import { PostService } from './services/post.service';
+import { HeaderComponent } from './header/header.component';
 
 const appRoutes: Routes = [
-  { path: 'posts', component: PostListComponentComponent },
+  { path: 'posts', component: PostListComponent },
   { path: 'new', component: NewPostComponentComponent },
   { path: '', redirectTo: 'posts', pathMatch: 'full' },
   { path: '**', redirectTo: 'posts' }
@@ -19,9 +20,10 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    PostListItemComponentComponent,
-    PostListComponentComponent,
-    NewPostComponentComponent
+    PostListItemComponent,
+    PostListComponent,
+    NewPostComponentComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
