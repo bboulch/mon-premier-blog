@@ -16,11 +16,13 @@ export class PostListItemComponent {
   constructor(private postService: PostService) { }
 
   onLoveIt(post: Post) {
-    post.loveIts++;
+    // post.loveIts++;
+   this.postService.increaseLoveIt(post);
   }
 
   onDontLoveIt(post: Post) {
-    post.loveIts--;
+    // post.loveIts--;
+    this.postService.decreaseLoveIt(post);
   }
 
   onDeletePost(post: Post) {

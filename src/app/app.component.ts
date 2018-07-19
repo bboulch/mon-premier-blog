@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Post } from './models/Post.model';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +8,18 @@ import { Post } from './models/Post.model';
 })
 
 export class AppComponent {
-  title = 'My First Angular Blog...';
+
+  constructor() {
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDobudpAU7_sn6BtortXEfvdyG8fL9F-E8",
+      authDomain: "mon-premier-blog-e88bc.firebaseapp.com",
+      databaseURL: "https://mon-premier-blog-e88bc.firebaseio.com",
+      projectId: "mon-premier-blog-e88bc",
+      storageBucket: "mon-premier-blog-e88bc.appspot.com",
+      messagingSenderId: "982018720699"
+    };
+    firebase.initializeApp(config);
+  }
 
 }

@@ -37,4 +37,16 @@ export class PostService {
     this.emitPostSubject();
   }
 
+  increaseLoveIt(post: Post) {
+    this.updateLoveIt(post, +1);
+  }
+
+  decreaseLoveIt(post: Post) {
+    this.updateLoveIt(post, -1);
+  }
+
+  updateLoveIt(post: Post, count: number) {
+    post.loveIts += count;
+  }
+
 }
